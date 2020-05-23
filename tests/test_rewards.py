@@ -23,6 +23,10 @@ class TestGaussianReward(TestCase):
         assert s == 0
         assert k == 0
 
+    def test_expected_reward(self):
+        gr = GaussianReward(mean=3)
+        assert gr.expected_reward() == 3
+
 
 class TestPoissonReward(TestCase):
     def test_smoke(self):
@@ -35,3 +39,7 @@ class TestPoissonReward(TestCase):
         m, v = pr.dist.stats(moments="mv")
         assert m == np.pi
         assert v == np.pi
+
+    def test_expected_reward(self):
+        pr = PoissonReward(mu=3)
+        assert pr.expected_reward() == 3
