@@ -1,4 +1,4 @@
-# MultiArmedBandits [![Build Status](https://travis-ci.com/tmcclintock/MultiArmedBandits.svg?branch=master)](https://travis-ci.com/tmcclintock/MultiArmedBandits)
+# MultiArmedBandits [![Build Status](https://travis-ci.com/tmcclintock/MultiArmedBandits.svg?branch=master)](https://travis-ci.com/tmcclintock/MultiArmedBandits)[![Coverage Status](https://coveralls.io/repos/github/tmcclintock/MultiArmedBandits/badge.svg?branch=master)](https://coveralls.io/github/tmcclintock/MultiArmedBandits?branch=master)
 
 An implementation of a few multi-armed bandit algorithms.
 
