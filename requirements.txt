@@ -1,6 +1,9 @@
 numpy
+scipy
 matplotlib
 jupyter
 black
 flake8
 pre-commit
+pytest
+coverage
