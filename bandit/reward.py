@@ -32,6 +32,9 @@ class BaseReward(ABC):
     def expected_reward(self):
         return self.dist.stats("m")
 
+    def moments(self):
+        return self.dist.stats("mv")
+
 
 class GaussianReward(BaseReward):
     """
