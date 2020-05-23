@@ -27,6 +27,7 @@ class BaseReward(ABC):
     def get_reward(self):
         return self.dist.rvs()
 
+    @abstractmethod
     def expected_reward(self):
         return self.dist.stats("m")
 
@@ -47,6 +48,9 @@ class GaussianReward(BaseReward):
     def get_reward(self):
         return super().get_reward()
 
+    def expected_reward(self):
+        return super().expected_reward()
+
 
 class PoissonReward(BaseReward):
     """
@@ -63,3 +67,6 @@ class PoissonReward(BaseReward):
 
     def get_reward(self):
         return super().get_reward()
+
+    def expected_reward(self):
+        return super().expected_reward()
