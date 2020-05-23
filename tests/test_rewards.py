@@ -33,6 +33,11 @@ class TestGaussianReward(TestCase):
         assert m == 3
         np.testing.assert_almost_equal(v, np.pi)
 
+    def test_get_reward(self):
+        gr = GaussianReward(mean=3, var=np.pi)
+        r = gr.get_reward()
+        assert isinstance(r, float)
+
 
 class TestPoissonReward(TestCase):
     def test_smoke(self):
@@ -55,3 +60,8 @@ class TestPoissonReward(TestCase):
         m, v = pr.moments()
         assert m == np.pi
         assert v == np.pi
+
+    def test_get_reward(self):
+        pr = PoissonReward(mu=3)
+        r = pr.get_reward()
+        assert isinstance(r, int)

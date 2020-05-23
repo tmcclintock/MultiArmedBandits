@@ -3,6 +3,7 @@ Tests of the environment object.
 """
 
 import numpy as np
+import pytest
 
 from unittest import TestCase
 
@@ -35,3 +36,18 @@ class TestEnvironment(TestCase):
         er = e.expected_rewards()
         for i, r in enumerate(er):
             assert r == rewards[i].expected_reward()
+
+    def test_action(self):
+        rewards = [PoissonReward(mu) for mu in np.random.rand(10) + 1]
+        e = Environment(rewards)
+        with pytest.raises(AssertionError):
+            e.action(11)
+        r = e.action(0)
+        print(r)
+        assert type(r) in [float, int]
+
+    def test_moments(self):
+        rewards = [PoissonReward(mu) for mu in [4] * 5]
+        e = Environment(rewards)
+        moments = e.moments()
+        assert np.all(moments == 4)

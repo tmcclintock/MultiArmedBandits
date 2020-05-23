@@ -24,8 +24,8 @@ class Environment:
 
     def action(self, i: int):
         assert i > -1
-        assert i < self.n
-        return self.rewards[i]
+        assert i < self.__len__()
+        return self.rewards[i].get_reward()
 
     def expected_rewards(self):
         return np.array([r.expected_reward() for r in self.rewards])
