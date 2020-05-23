@@ -21,6 +21,7 @@ class BaseReward(ABC):
 
     def __init__(self, dist: Callable):
         assert hasattr(dist, "rvs"), "distribution must have rvs() method"
+        assert hasattr(dist, "stats"), "distribution must have a stats method"
         self.dist = dist
 
     @abstractmethod
