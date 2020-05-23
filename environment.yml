@@ -11,18 +11,23 @@ dependencies:
   - bleach=3.1.5=pyh9f0ad1d_0
   - ca-certificates=2020.4.5.1=hecc5488_0
   - certifi=2020.4.5.1=py37hc8dfbb8_0
+  - cfgv=3.1.0=py_0
   - click=7.1.2=pyh9f0ad1d_0
   - cycler=0.10.0=py_2
   - dbus=1.13.6=h2f22bb5_0
   - decorator=4.4.2=py_0
   - defusedxml=0.6.0=py_0
+  - distlib=0.3.0=pyh9f0ad1d_0
+  - editdistance=0.5.3=py37h570ac47_0
   - entrypoints=0.3=py37hc8dfbb8_1001
   - expat=2.2.9=h4a8c4bd_2
+  - filelock=3.0.12=pyh9f0ad1d_0
   - flake8=3.8.1=pyh9f0ad1d_0
   - freetype=2.10.2=h8da9a1a_0
   - gettext=0.19.8.1=h46ab8bc_1002
   - glib=2.64.2=h577aef8_1
   - icu=64.2=h6de7cb9_1
+  - identify=1.4.16=pyh9f0ad1d_0
   - importlib-metadata=1.6.0=py37hc8dfbb8_0
   - importlib_metadata=1.6.0=0
   - ipykernel=5.3.0=py37h43977f1_0
@@ -63,6 +68,7 @@ dependencies:
   - nbconvert=5.6.1=py37hc8dfbb8_1
   - nbformat=5.0.6=py_0
   - ncurses=6.1=h0a44026_1002
+  - nodeenv=1.3.5=py_0
   - notebook=6.0.3=py37hc8dfbb8_0
   - nspr=4.20=h0a44026_1000
   - nss=3.47=hc0980d9_0
@@ -77,6 +83,7 @@ dependencies:
   - pexpect=4.8.0=py37hc8dfbb8_1
   - pickleshare=0.7.5=py37hc8dfbb8_1001
   - pip=20.1.1=pyh9f0ad1d_0
+  - pre-commit=2.4.0=py37hc8dfbb8_1
   - prometheus_client=0.7.1=py_0
   - prompt-toolkit=3.0.5=py_0
   - prompt_toolkit=3.0.5=0
@@ -90,6 +97,7 @@ dependencies:
   - python=3.7.6=h90870a6_5_cpython
   - python-dateutil=2.8.1=py_0
   - python_abi=3.7=1_cp37m
+  - pyyaml=5.3.1=py37h9bfed18_0
   - pyzmq=19.0.1=py37haec44b1_0
   - qt=5.12.5=h514805e_3
   - qtconsole=4.7.4=pyh9f0ad1d_0
@@ -108,11 +116,13 @@ dependencies:
   - traitlets=4.3.3=py37hc8dfbb8_1
   - typed-ast=1.4.1=py37h0b31af3_0
   - typing_extensions=3.7.4.2=py_0
+  - virtualenv=20.0.20=py37hc8dfbb8_1
   - wcwidth=0.1.9=pyh9f0ad1d_0
   - webencodings=0.5.1=py_1
   - wheel=0.34.2=py_1
   - widgetsnbextension=3.5.1=py37_0
   - xz=5.2.5=h0b31af3_0
+  - yaml=0.2.4=h0b31af3_0
   - zeromq=4.3.2=h6de7cb9_2
   - zipp=3.1.0=py_0
   - zlib=1.2.11=h0b31af3_1006
