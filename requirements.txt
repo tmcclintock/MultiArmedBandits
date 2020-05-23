@@ -1,3 +1,6 @@
 numpy
 matplotlib
 jupyter
+black
+flake8
+pre-commit
