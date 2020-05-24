@@ -4,7 +4,7 @@ Tests of bandits.
 
 from unittest import TestCase
 
-from bandit.agent import RandomBandit
+from bandit.bandit import RandomBandit
 from bandit.environment import Environment
 from bandit.reward import GaussianReward
 
