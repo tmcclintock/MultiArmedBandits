@@ -2,7 +2,7 @@
 Classes for the environment and the reward model.
 """
 
-from typing import Callable
+from typing import Callable, List, Union
 
 import numpy as np
 import scipy.stats as ss
@@ -25,15 +25,15 @@ class BaseReward(ABC):
         self.dist = dist
 
     @abstractmethod
-    def get_reward(self):
+    def get_reward(self) -> Union[float, int]:
         return self.dist.rvs()
 
     @abstractmethod
-    def expected_reward(self):
+    def expected_reward(self) -> Union[float, int]:
         return self.dist.stats("m")
 
-    def moments(self):
-        return self.dist.stats("mv")
+    def moments(self, kind: str = "mv") -> List[float]:
+        return self.dist.stats(kind)
 
 
 class GaussianReward(BaseReward):
@@ -49,10 +49,10 @@ class GaussianReward(BaseReward):
         assert var > 0, "variance must be positive"
         super().__init__(ss.norm(loc=mean, scale=np.sqrt(var)))
 
-    def get_reward(self):
+    def get_reward(self) -> float:
         return super().get_reward()
 
-    def expected_reward(self):
+    def expected_reward(self) -> float:
         return super().expected_reward()
 
 
@@ -69,8 +69,8 @@ class PoissonReward(BaseReward):
         assert mu > 0, "poisson rate must be positive"
         super().__init__(ss.poisson(mu=mu, loc=loc))
 
-    def get_reward(self):
+    def get_reward(self) -> int:
         return super().get_reward()
 
-    def expected_reward(self):
+    def expected_reward(self) -> float:
         return super().expected_reward()
