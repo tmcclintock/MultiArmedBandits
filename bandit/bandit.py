@@ -30,8 +30,11 @@ class BaseBandit(ABC):
         return 0
 
     def action(self, i: int = None) -> float:
-        a = self.choose_action() if i is None else 0
-        return self.environment.action(a)
+        choice = self.choose_action() if i is None else 0
+        self.choice_history.append(choice)
+        reward = self.environment.action(choice)
+        self.reward_history.append(reward)
+        return reward
 
     @property
     def history(self) -> Tuple[List, List]:

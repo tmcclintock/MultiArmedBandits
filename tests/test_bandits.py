@@ -29,6 +29,12 @@ class TestRandomBandit(TestCase):
         rh, ch = b.history
         assert rh == []
         assert ch == []
+        _ = b.action()
+        rh, ch = b.history
+        assert len(rh) == 1
+        assert len(ch) == 1
+        assert isinstance(rh[0], float)
+        assert isinstance(ch[0], int)
 
     def test_choose_action(self):
         b = RandomBandit(self.env)
