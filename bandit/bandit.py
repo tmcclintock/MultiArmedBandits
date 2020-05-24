@@ -2,7 +2,7 @@
 Bandit agents that implement various strategies.
 """
 
-from typing import List, Tuple
+from typing import List, Tuple, Union
 
 from abc import ABC, abstractmethod
 
@@ -24,16 +24,44 @@ class BaseBandit(ABC):
             self.values = values
         self.reward_history = []
         self.choice_history = []
+        self.n = 0
 
     @abstractmethod
     def choose_action(self, *args, **kwargs) -> int:
         return 0
 
-    def action(self, i: int = None) -> float:
-        choice = self.choose_action() if i is None else 0
+    def update_history_and_values(
+        self, choice: int, reward: Union[float, int]
+    ) -> None:
+        """
+        Update the histories and the value estimates. This base
+        class assumes a sample mean estimate for the values.
+        Different strategies require overwriting this function.
+
+        Args:
+            choice (int): choiec of action taken
+            reward (Union[float, int]): reward recieved
+        """
+        self.values[choice] += float(reward - self.values[choice]) / (
+            self.n + 1
+        )
         self.choice_history.append(choice)
-        reward = self.environment.action(choice)
         self.reward_history.append(reward)
+        self.n += 1
+        return
+
+    def action(self, i: int = None) -> float:
+        """
+        Take an action.
+        Args:
+            i (int): action to take
+
+        Returns:
+            (float) reward of the taken action
+        """
+        choice = self.choose_action() if i is None else 0
+        reward = self.environment.action(choice)
+        self.update_history_and_values(choice, reward)
         return reward
 
     @property
@@ -52,3 +80,16 @@ class RandomBandit(BaseBandit):
         Choose a random action.
         """
         return np.random.randint(0, len(self.environment))
+
+
+class GreedyBandit(BaseBandit):
+    """
+    Greedy bandit that always selects the optimally valued
+    action.
+    """
+
+    def choose_action(self, *args, **kwargs) -> int:
+        """
+        Choose the action with the highest value.
+        """
+        return np.argmax(self.values)
