@@ -2,20 +2,23 @@
 Tests of bandits.
 """
 
+import numpy as np
 from unittest import TestCase
 
-from bandit.bandit import RandomBandit
+from bandit.bandit import GreedyBandit, RandomBandit
 from bandit.environment import Environment
 from bandit.reward import GaussianReward
 
 
-class TestRandomBandit(TestCase):
+class BanditTestCase(TestCase):
     def setUp(self):
         super().setUp()
         N = 5
         self.n_rewards = N
         self.env = Environment([GaussianReward() for _ in range(N)])
 
+
+class TestRandomBandit(BanditTestCase):
     def test_smoke(self):
         b = RandomBandit(self.env)
         assert isinstance(b, RandomBandit)
@@ -59,3 +62,10 @@ class TestRandomBandit(TestCase):
         assert b.values == [0.0] * len(self.env)
         b = RandomBandit(self.env, values=[1.0] * len(self.env))
         assert b.values == [1.0] * len(self.env)
+
+
+class TestGreedyBandit(BanditTestCase):
+    def test_choose_action(self):
+        b = GreedyBandit(self.env)
+        assert np.issubdtype(b.choose_action(), np.integer)
+        assert np.issubdtype(b.action(), np.floating)

@@ -28,7 +28,7 @@ class BaseBandit(ABC):
 
     @abstractmethod
     def choose_action(self, *args, **kwargs) -> int:
-        return 0
+        return 0  # pragma: no cover
 
     def update_history_and_values(
         self, choice: int, reward: Union[float, int]
