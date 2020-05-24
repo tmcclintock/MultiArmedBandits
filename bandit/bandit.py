@@ -24,7 +24,10 @@ class BaseBandit(ABC):
             self.values = values
         self.reward_history = []
         self.choice_history = []
-        self.n = 0
+        self._n = 0
+
+    def __len__(self):
+        return self._n
 
     @abstractmethod
     def choose_action(self, *args, **kwargs) -> int:
@@ -43,11 +46,11 @@ class BaseBandit(ABC):
             reward (Union[float, int]): reward recieved
         """
         self.values[choice] += float(reward - self.values[choice]) / (
-            self.n + 1
+            self._n + 1
         )
         self.choice_history.append(choice)
         self.reward_history.append(reward)
-        self.n += 1
+        self._n += 1
         return
 
     def action(self, i: int = None) -> float:

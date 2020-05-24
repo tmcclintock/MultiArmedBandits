@@ -32,12 +32,14 @@ class TestRandomBandit(BanditTestCase):
         rh, ch = b.history
         assert rh == []
         assert ch == []
+        assert len(b) == 0
         _ = b.action()
         rh, ch = b.history
         assert len(rh) == 1
         assert len(ch) == 1
         assert isinstance(rh[0], float)
         assert isinstance(ch[0], int)
+        assert len(b) == 1
         for _ in range(99):
             _ = b.action()
         rh, ch = b.history
@@ -45,6 +47,7 @@ class TestRandomBandit(BanditTestCase):
         assert len(ch) == 100
         assert isinstance(rh[99], float)
         assert isinstance(ch[99], int)
+        assert len(b) == 100
 
     def test_choose_action(self):
         b = RandomBandit(self.env)
