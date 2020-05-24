@@ -78,6 +78,9 @@ class RandomBandit(BaseBandit):
     def choose_action(self, *args, **kwargs) -> int:
         """
         Choose a random action.
+
+        Returns:
+            (int) action choice
         """
         return np.random.randint(0, len(self.environment))
 
@@ -91,5 +94,11 @@ class GreedyBandit(BaseBandit):
     def choose_action(self, *args, **kwargs) -> int:
         """
         Choose the action with the highest value.
+        In case of any ties, return a random selection.
+
+        Returns:
+            (int) action choice
         """
-        return np.argmax(self.values)
+        return np.random.choice(
+            np.where(self.values == np.max(self.values))[0]
+        )
