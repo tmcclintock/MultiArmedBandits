@@ -21,6 +21,14 @@ class TestRandomBandit(TestCase):
         assert isinstance(b, RandomBandit)
         assert isinstance(b.environment, Environment)
         assert len(b.environment) == self.n_rewards
+        assert b.reward_history == []
+        assert b.choice_history == []
+
+    def test_history(self):
+        b = RandomBandit(self.env)
+        rh, ch = b.history
+        assert rh == []
+        assert ch == []
 
     def test_choose_action(self):
         b = RandomBandit(self.env)
