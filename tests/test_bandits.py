@@ -32,3 +32,9 @@ class TestRandomBandit(TestCase):
         assert isinstance(b.action(), float)
         a2 = b.action()
         assert a != a2  # unless we get very unlucky
+
+    def test_values(self):
+        b = RandomBandit(self.env)
+        assert b.values == [0.0] * len(self.env)
+        b = RandomBandit(self.env, values=[1.0] * len(self.env))
+        assert b.values == [1.0] * len(self.env)
