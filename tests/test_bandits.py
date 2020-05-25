@@ -76,8 +76,21 @@ class TestGreedyBandit(BanditTestCase):
 
 class TestEpsGreedyBandit(BanditTestCase):
     def test_choose_action(self):
-        b = EpsGreedyBandit(self.env, 0.1)
+        eps = 1.0
+        b = EpsGreedyBandit(self.env, eps)
         assert hasattr(b, "eps")
-        assert b.eps == 0.1
+        assert b.eps == eps
+        assert np.issubdtype(b.choose_action(), np.integer)
+        assert np.issubdtype(b.action(), np.floating)
+        eps = 0.0
+        b = EpsGreedyBandit(self.env, eps)
+        assert hasattr(b, "eps")
+        assert b.eps == eps
+        assert np.issubdtype(b.choose_action(), np.integer)
+        assert np.issubdtype(b.action(), np.floating)
+        eps = 0.1
+        b = EpsGreedyBandit(self.env, eps)
+        assert hasattr(b, "eps")
+        assert b.eps == eps
         assert np.issubdtype(b.choose_action(), np.integer)
         assert np.issubdtype(b.action(), np.floating)

@@ -132,7 +132,7 @@ class EpsGreedyBandit(BaseBandit):
             (int) action choice
         """
         if np.random.rand() < self.eps:  # random step
-            return np.random.randint(0, len(self.environment))
+            return np.random.randint(0, len(self.environment), dtype=np.int32)
         else:  # greedy step
             return np.random.choice(
                 np.where(self.values == np.max(self.values))[0]
