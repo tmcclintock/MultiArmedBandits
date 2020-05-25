@@ -105,3 +105,35 @@ class GreedyBandit(BaseBandit):
         return np.random.choice(
             np.where(self.values == np.max(self.values))[0]
         )
+
+
+class EpsGreedyBandit(BaseBandit):
+    """
+    Epsilon-Greedy bandit, that makes a random choice
+    100*episilon percent of the time for exploration
+    and acts greedily the rest of the time.
+
+    Args:
+        eps (float): fraction of time taking exploratory actions
+    """
+
+    def __init__(
+        self, environment: Environment, eps: float, values: List[float] = None
+    ):
+        super().__init__(environment, values)
+        self.eps = eps
+
+    def choose_action(self, *args, **kwargs) -> int:
+        """
+        Choose a random action `100*self.eps` percent of the time
+        and otherwise take greedy actions.
+
+        Returns:
+            (int) action choice
+        """
+        if np.random.rand() < self.eps:  # random step
+            return np.random.randint(0, len(self.environment))
+        else:  # greedy step
+            return np.random.choice(
+                np.where(self.values == np.max(self.values))[0]
+            )

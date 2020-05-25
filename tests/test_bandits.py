@@ -5,7 +5,7 @@ Tests of bandits.
 import numpy as np
 from unittest import TestCase
 
-from bandit.bandit import GreedyBandit, RandomBandit
+from bandit.bandit import EpsGreedyBandit, GreedyBandit, RandomBandit
 from bandit.environment import Environment
 from bandit.reward import GaussianReward
 
@@ -70,5 +70,14 @@ class TestRandomBandit(BanditTestCase):
 class TestGreedyBandit(BanditTestCase):
     def test_choose_action(self):
         b = GreedyBandit(self.env)
+        assert np.issubdtype(b.choose_action(), np.integer)
+        assert np.issubdtype(b.action(), np.floating)
+
+
+class TestEpsGreedyBandit(BanditTestCase):
+    def test_choose_action(self):
+        b = EpsGreedyBandit(self.env, 0.1)
+        assert hasattr(b, "eps")
+        assert b.eps == 0.1
         assert np.issubdtype(b.choose_action(), np.integer)
         assert np.issubdtype(b.action(), np.floating)
