@@ -17,6 +17,8 @@ def plot_reward_distributions(
     """
     Create violin plots of the reward distributions.
 
+    TODO: add **plot_kwargs
+
     Args:
         rewards (List[Rewards]): rewards to make distributions of
         axis (mpl.axes.Axes) axis to use for plotting, default `None`
@@ -42,13 +44,13 @@ def plot_reward_distributions(
                 y = r.dist.pmf(x)
                 scale = 0.4 / y.max()
                 for xi, yi in zip(x, y):
-                    plt.plot(
+                    axis.plot(
                         [i - yi * scale, i - yi * scale],
                         [xi, xi + 1],
                         color="gray",
                         alpha=0.5,
                     )
-                    plt.plot(
+                    axis.plot(
                         [i + yi * scale, i + yi * scale],
                         [xi, xi + 1],
                         color="gray",
@@ -58,8 +60,8 @@ def plot_reward_distributions(
                 x = np.linspace(min(interval), max(interval), 100)
                 y = r.dist.pdf(x)
                 scale = 0.4 / y.max()
-                plt.plot(i - y * scale, x, color="gray", alpha=0.5)
-                plt.plot(i + y * scale, x, color="gray", alpha=0.5)
+                axis.plot(i - y * scale, x, color="gray", alpha=0.5)
+                axis.plot(i + y * scale, x, color="gray", alpha=0.5)
             else:  # need to do random draws
                 raise NotImplementedError(
                     "only scipy.stats distributions supported"
@@ -68,5 +70,27 @@ def plot_reward_distributions(
             raise NotImplementedError(
                 "only scipy.stats distributions supported"
             )  # pragma: no cover
+
+    return fig, axis
+
+
+def plot_average_rewards(
+    reward_histories: List, axis: "mpl.axes.Axes" = None
+) -> Tuple[mpl.figure.Figure, mpl.axes.Axes]:
+    """
+    Given a set of reward histories, plot their averages.
+
+    TODO: add **plot_kwargs
+
+    Args:
+        reward_histories (List): a list of received rewards for all bandits
+        axis (mpl.axes.Axes) axis to use for plotting, default `None`
+    """
+    if axis is None:
+        fig, axis = plt.subplots()
+    else:
+        fig = plt.gcf()
+
+    axis.plot(np.mean(reward_histories, axis=0))
 
     return fig, axis
