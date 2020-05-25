@@ -3,5 +3,5 @@ from bandit.bandit import (  # noqa: F401
     GreedyBandit,
     RandomBandit,
 )
-from bandit.reward import GaussianReward, PoissonReward  # noqa: F401
 from bandit.environment import Environment  # noqa: F401
+from bandit.reward import GaussianReward, PoissonReward  # noqa: F401
