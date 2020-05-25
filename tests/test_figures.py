@@ -53,6 +53,15 @@ class TestFigures(TestCase):
         assert isinstance(fig, mpl.figure.Figure)
         assert isinstance(ax, mpl.axes.Axes)
 
+    @pytest.mark.slow
+    def test_plot_average_rewards_with_axis(self):
+        fig, axis = mpl.pyplot.subplots()
+        reward_histories = [b.history[0] for b in self.bandits]
+        fig, ax = plot_average_rewards(reward_histories, axis=axis)
+        assert isinstance(fig, mpl.figure.Figure)
+        assert isinstance(ax, mpl.axes.Axes)
+        assert ax == axis
+
 
 if __name__ == "__main__":
     tf = TestFigures()
