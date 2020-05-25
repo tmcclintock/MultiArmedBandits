@@ -1,0 +1,1 @@
+This directory contains notebooks for working with the bandit package.
