@@ -22,16 +22,16 @@ class BaseBandit(ABC):
             self.values = [0.0] * len(self.environment)
         else:
             self.values = values
+        self.n_selections = np.zeros(len(self.environment), dtype=np.int32)
         self.reward_history = []
         self.choice_history = []
-        self._n = 0
 
     def __len__(self):
-        return self._n
+        return len(self.choice_history)
 
     @abstractmethod
     def choose_action(self, *args, **kwargs) -> int:
-        return 0  # pragma: no cover
+        pass  # pragma: no cover
 
     def update_history_and_values(
         self, choice: int, reward: Union[float, int]
@@ -45,12 +45,13 @@ class BaseBandit(ABC):
             choice (int): choiec of action taken
             reward (Union[float, int]): reward recieved
         """
+        self.n_selections[choice] += 1
         self.values[choice] += float(reward - self.values[choice]) / (
-            self._n + 1
+            self.n_selections[choice]
         )
         self.choice_history.append(choice)
         self.reward_history.append(reward)
-        self._n += 1
+
         return
 
     def action(self, i: int = None) -> float:
@@ -132,7 +133,7 @@ class EpsGreedyBandit(BaseBandit):
             (int) action choice
         """
         if np.random.rand() < self.eps:  # random step
-            return np.random.randint(0, len(self.environment), dtype=np.int32)
+            return np.random.randint(len(self.environment), dtype=np.int32)
         else:  # greedy step
             return np.random.choice(
                 np.where(self.values == np.max(self.values))[0]
