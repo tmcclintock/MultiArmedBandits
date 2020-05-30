@@ -68,6 +68,6 @@ bandit = GreedyBandit(environment)
 
 for _ in range(1000):
     bandit.action()
-``
+```
 the results of this experiment (reward and choice history) are stored in
 `bandit.history` for easy analysis.
