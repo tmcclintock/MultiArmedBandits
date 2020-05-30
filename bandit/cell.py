@@ -8,9 +8,9 @@ from bandit.bandit import BaseBandit
 from bandit.environment import Environment
 
 
-class Gang:
+class Cell:
     """
-    A gang of bandits that all sample the same environment
+    A cell of bandits that all sample the same environment
     for the same number of steps.
 
     Args:
@@ -37,7 +37,7 @@ class Gang:
 
     def take_actions(self, n_actions: int) -> None:
         """
-        Take `n_actions` actions for each bandit in the gang.
+        Take `n_actions` actions for each bandit in the cell.
 
         Args:
             n_actions (int): number of actions to take
