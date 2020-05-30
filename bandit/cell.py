@@ -48,11 +48,11 @@ class Cell:
         self._n_actions_taken += n_actions
 
     def __len__(self) -> int:
-        return self._nactions_taken
+        return self._n_actions_taken
 
     @property
     def n_actions_taken(self) -> int:
-        return self.n_actions_taken
+        return self._n_actions_taken
 
     @property
     def len_env(self) -> int:
