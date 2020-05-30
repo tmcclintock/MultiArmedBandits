@@ -1,4 +1,4 @@
-# MultiArmedBandits [![Build Status](https://travis-ci.com/tmcclintock/MultiArmedBandits.svg?branch=master)](https://travis-ci.com/tmcclintock/MultiArmedBandits)[![Coverage Status](https://coveralls.io/repos/github/tmcclintock/MultiArmedBandits/badge.svg?branch=master)](https://coveralls.io/github/tmcclintock/MultiArmedBandits?branch=master)
+# MultiArmedBandits [![Build Status](https://travis-ci.com/tmcclintock/MultiArmedBandits.svg?branch=master)](https://travis-ci.com/tmcclintock/MultiArmedBandits)[![Coverage Status](https://coveralls.io/repos/github/tmcclintock/MultiArmedBandits/badge.svg?branch=master)](<img srg="https://coveralls.io/github/tmcclintock/MultiArmedBandits?branch=master" />)
 
 A package to build and test bandit algorithms.
 
