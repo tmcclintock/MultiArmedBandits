@@ -60,9 +60,11 @@ with ten Gaussian (normal) distributed rewards, and you would like the
 bandit to take one thousand actions in order to see how it performed. This
 can be accomplished in the following short program:
 ```python
-from bandit import *
+from bandit.bandit import GreedyBandit
+from bandit.environment import Environment
+from bandit.reward import GaussianReward
 
-rewards = [GaussienReward() for _ in range(10)]
+rewards = [GaussianReward() for _ in range(10)]
 environment = Environment(rewards)
 bandit = GreedyBandit(environment)
 
