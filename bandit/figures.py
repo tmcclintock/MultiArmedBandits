@@ -12,7 +12,7 @@ from scipy.stats import rv_discrete, rv_continuous
 
 
 def plot_reward_distributions(
-    rewards: List, axis: "mpl.axes.Axes" = None
+    rewards: List, axis: "mpl.axes.Axes" = None,
 ) -> Tuple[mpl.figure.Figure, mpl.axes.Axes]:
     """
     Create violin plots of the reward distributions.
@@ -75,7 +75,7 @@ def plot_reward_distributions(
 
 
 def plot_average_rewards(
-    reward_histories: List, axis: "mpl.axes.Axes" = None
+    reward_histories: List, axis: "mpl.axes.Axes" = None, **plot_kwargs,
 ) -> Tuple[mpl.figure.Figure, mpl.axes.Axes]:
     """
     Given a set of reward histories, plot their averages.
@@ -84,13 +84,14 @@ def plot_average_rewards(
 
     Args:
         reward_histories (List): a list of received rewards for all bandits
-        axis (mpl.axes.Axes) axis to use for plotting, default `None`
+        axis (mpl.axes.Axes): axis to use for plotting, default `None`
+        plot_kwargs (dict): key-value pairs for the `axis.plot` function
     """
     if axis is None:
         fig, axis = plt.subplots()
     else:
         fig = plt.gcf()
 
-    axis.plot(np.mean(reward_histories, axis=0))
+    axis.plot(np.mean(reward_histories, axis=0), **plot_kwargs)
 
     return fig, axis
