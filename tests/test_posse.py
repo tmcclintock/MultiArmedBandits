@@ -64,3 +64,15 @@ class PosseTestCase(TestCase):
         assert posse.mean_best_choice(bc.tolist()).shape == (100,)
         with pytest.raises(TypeError):
             posse.mean_best_choice(3.1415)
+
+    def test_var_best_choice(self):
+        N_bandits = 20
+        posse = Posse(self.env, GreedyBandit, n_bandits=N_bandits)
+        N_actions = 100
+        posse.take_actions(N_actions)
+        bc = np.zeros(100)
+        assert posse.var_best_choice(bc).shape == (100,)
+        assert posse.var_best_choice(0).shape == (100,)
+        assert posse.var_best_choice(bc.tolist()).shape == (100,)
+        with pytest.raises(TypeError):
+            posse.var_best_choice(3.1415)
