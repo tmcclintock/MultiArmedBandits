@@ -3,9 +3,15 @@ Tests of bandits.
 """
 
 import numpy as np
+import pytest
 from unittest import TestCase
 
-from bandit.bandit import EpsGreedyBandit, GreedyBandit, RandomBandit
+from bandit.bandit import (
+    CustomBandit,
+    EpsGreedyBandit,
+    GreedyBandit,
+    RandomBandit,
+)
 from bandit.environment import Environment
 from bandit.reward import GaussianReward
 
@@ -16,6 +22,12 @@ class BanditTestCase(TestCase):
         N = 5
         self.n_rewards = N
         self.env = Environment([GaussianReward() for _ in range(N)])
+
+
+class TestCustomBandit(BanditTestCase):
+    def test_not_implemented_error(self):
+        with pytest.raises(NotImplementedError):
+            CustomBandit(self.env).choose_action()
 
 
 class TestRandomBandit(BanditTestCase):

@@ -73,6 +73,16 @@ class BaseBandit(ABC):
         return (self.reward_history, self.choice_history)
 
 
+class CustomBandit(BaseBandit):
+    """
+    Wrapper around the `BaseBandit` for creating custom
+    bandit subclasses.
+    """
+
+    def choose_action(self, *args, **kwargs) -> int:
+        raise NotImplementedError
+
+
 class RandomBandit(BaseBandit):
     """
     A totally random bandit with no strategy.
