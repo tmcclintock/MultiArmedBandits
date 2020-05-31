@@ -1,0 +1,1 @@
+Images for the docs and in the `README` files.
