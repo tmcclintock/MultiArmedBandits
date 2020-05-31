@@ -2,7 +2,9 @@
 A gang of bandit agents for easily performing testing en masse.
 """
 
-from typing import List, Type
+from typing import List, Type, Union
+
+import numpy as np
 
 from bandit.bandit import BaseBandit
 from bandit.environment import Environment
@@ -46,6 +48,8 @@ class Posse:
             for b in self.bandits:
                 b.action()
         self._n_actions_taken += n_actions
+        self.reward_histories = np.array([[]])
+        self.choice_histories = np.array([[]])
 
     def __len__(self) -> int:
         return self._n_actions_taken
@@ -61,3 +65,58 @@ class Posse:
     @property
     def n_rewards(self) -> int:
         return self.len_env
+
+    def _update_histories(self) -> None:
+        """
+
+        """
+        self.reward_histories = np.array(
+            [b.reward_history for b in self.bandits]
+        )
+        self.choice_histories = np.array(
+            [b.choice_history for b in self.bandits]
+        )
+
+    def mean_reward(self) -> np.ndarray:
+        """
+        Average reward at each time computed over all bandits.
+        """
+        if self.n_actions_taken > len(self.reward_histories[0]):
+            self._update_histories()
+        return np.mean(self.reward_histories, axis=0)
+
+    def var_reward(self) -> np.ndarray:
+        """
+        Variance at each time of the reward computed over all bandits.
+        """
+        if self.n_actions_taken > len(self.reward_histories[0]):
+            self._update_histories
+        return np.var(self.reward_histories, axis=0)
+
+    def mean_best_choice(
+        self, best_choice: Union[int, Union[List, np.ndarray]],
+    ) -> np.ndarray:
+        """
+        Average of the best choice at each time computed over all bandits.
+
+        Args:
+            best_choice (Union[int, List[int], np.ndarray]): if int, the
+                best choice for all times. If list of `np.ndarray` then
+                the best choice at each time step.
+        """
+        if self.n_actions_taken > len(self.reward_histories[0]):
+            self._update_histories()
+
+        if type(best_choice) in [list, np.ndarray]:
+            msg = "len(best_choices) must equal choice history of the bandits"
+            assert len(best_choice) == len(self.choice_histories[0]), msg
+            where_best = self.choice_histories == np.asarray(
+                best_choice, dtype=np.int32
+            )
+        elif isinstance(best_choice, int):
+            where_best = self.choice_histories == best_choice
+        else:
+            msg = f"best_choice must be int, list, np.ndarray but {type(best_choice)} provided"  # noqa: E501
+            raise TypeError(msg)
+
+        return np.mean(where_best, axis=0)

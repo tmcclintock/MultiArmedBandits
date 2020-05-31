@@ -2,6 +2,8 @@
 Tests of posses.
 """
 
+import numpy as np
+import pytest
 from unittest import TestCase
 
 from bandit.posse import Posse
@@ -42,3 +44,23 @@ class PosseTestCase(TestCase):
         eps = 0.1
         posse = Posse(self.env, EpsGreedyBandit, n_bandits=N_bandits, eps=eps)
         assert posse.bandits[0].eps == eps
+
+    def test_mean_var_reward(self):
+        N_bandits = 20
+        posse = Posse(self.env, GreedyBandit, n_bandits=N_bandits)
+        N_actions = 100
+        posse.take_actions(N_actions)
+        assert posse.mean_reward().shape == (100,)
+        assert posse.var_reward().shape == (100,)
+
+    def test_mean_best_choice(self):
+        N_bandits = 20
+        posse = Posse(self.env, GreedyBandit, n_bandits=N_bandits)
+        N_actions = 100
+        posse.take_actions(N_actions)
+        bc = np.zeros(100)
+        assert posse.mean_best_choice(bc).shape == (100,)
+        assert posse.mean_best_choice(0).shape == (100,)
+        assert posse.mean_best_choice(bc.tolist()).shape == (100,)
+        with pytest.raises(TypeError):
+            posse.mean_best_choice(3.1415)
