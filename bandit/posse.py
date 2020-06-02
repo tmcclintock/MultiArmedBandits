@@ -113,7 +113,7 @@ class Posse:
             where_best = self.choice_histories == np.asarray(
                 best_choice, dtype=np.int32
             )
-        elif isinstance(best_choice, int):
+        elif np.issubdtype(type(best_choice), np.integer):
             where_best = self.choice_histories == best_choice
         else:
             msg = f"best_choice must be int, list, np.ndarray but {type(best_choice)} provided"  # noqa: E501
@@ -141,7 +141,7 @@ class Posse:
             where_best = self.choice_histories == np.asarray(
                 best_choice, dtype=np.int32
             )
-        elif isinstance(best_choice, int):
+        elif np.issubdtype(type(best_choice), np.integer):
             where_best = self.choice_histories == best_choice
         else:
             msg = f"best_choice must be int, list, np.ndarray but {type(best_choice)} provided"  # noqa: E501

@@ -53,6 +53,15 @@ class PosseTestCase(TestCase):
         assert posse.mean_reward().shape == (100,)
         assert posse.var_reward().shape == (100,)
 
+    def test_mean_best_choice_with_int(self):
+        N_bandits = 20
+        posse = Posse(self.env, GreedyBandit, n_bandits=N_bandits)
+        N_actions = 100
+        posse.take_actions(N_actions)
+        bc = self.env.expected_rewards().argmax()
+        assert posse.mean_best_choice(bc).shape == (100,)
+        assert posse.var_best_choice(bc).shape == (100,)
+
     def test_mean_best_choice(self):
         N_bandits = 20
         posse = Posse(self.env, GreedyBandit, n_bandits=N_bandits)
