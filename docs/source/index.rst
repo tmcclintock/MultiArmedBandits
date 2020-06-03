@@ -1,13 +1,16 @@
 MultiArmedBandit Documentation
 ============================================
 
-.. automodule:: bandit.bandit
-                :members:
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   bandit
+   environment
+   figures
+   posse
+   reward
 
 
 Indices and tables
