@@ -1,10 +1,15 @@
 MultiArmedBandit Documentation
 ============================================
 
+.. toctree::
+   :maxdepth: 2     
+   :caption: Contents:
+
+   overview
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: API:
 
    bandit
    environment
