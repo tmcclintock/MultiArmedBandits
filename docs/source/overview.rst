@@ -29,6 +29,7 @@ In standard bandit problems, there are a finite number of
 discrete number :math:`n` of actions :math:`a_i\in\{a_1,a_2,...,a_n \}=\mathcal{A}`.
 
 Thus, the total return can be written as
+
 .. math::
 
    G = \sum_{i=1}^N r_i\,,\ r_i\sim P(R|a\in\mathcal{A})\,.
@@ -36,6 +37,21 @@ Thus, the total return can be written as
 Assuming :math:`N` is large, this means that we can obtain
 an optimal return by selecting an action that yields the highest
 exected return value
+
 .. math::
 
-   \hat{a} = ...
+   \hat{a} = \underset{a}{\operatorname{argmax}}\mathbb{E}[R|a]\,.
+
+The purpose of bandit **algorithms** are to try to learn from the
+environment which action is optimal.
+
+This repository is created to help explore this question in
+different contexts, or to run bandit experiments. You can find
+modular, fully tested implementations of **rewards**, **environments**,
+**bandits**, and a helpful construction called a **posse** or
+a collection of bandits to run an experiment with. In addition,
+helpful standard plotting routines for investigating
+bandit statistics are implemented in the **figures** methods.
+
+Read on to see advanced bandit problems solved using this package,
+as well as references for further learning.
