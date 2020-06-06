@@ -29,7 +29,13 @@ In standard bandit problems, there are a finite number of
 discrete number :math:`n` of actions :math:`a_i\in\{a_1,a_2,...,a_n \}=\mathcal{A}`.
 
 Thus, the total return can be written as
-
 .. math::
 
-   G = \sum_{i=1}^N r_i\,,\ r_i\sim P(R|a\in\mathcal{A})
+   G = \sum_{i=1}^N r_i\,,\ r_i\sim P(R|a\in\mathcal{A})\,.
+
+Assuming :math:`N` is large, this means that we can obtain
+an optimal return by selecting an action that yields the highest
+exected return value
+.. math::
+
+   \hat{a} = ...
